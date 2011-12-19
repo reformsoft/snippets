@@ -1,0 +1,12 @@
+^(.+)\W(\d{4}?)\W(.*)\.(.+)$
+
+Currently works on:
+
+Bob.the.Builder.2011.EEE.mkv
+Bob The Builder (2011).mkv
+Bob 55 (2011)EEE-bbb.def.mkv
+
+Needs to work with:
+
+The Terminator.mkv
+The Bob 2011.mkv

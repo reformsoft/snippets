@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <script type="application/javascript">
+
+            var CanvasElement;
+            var DrawingContext;
+            var SectionSize;
+            var BoardSize;
+            var SectionBorder = 5;
+            var CurrentTurn = 1;
+            var Board = new Array(new Array("-", "-", "-"),
+                    new Array("-", "-", "-"), new Array("-", "-", "-"));
+
+function DrawO(x, y) {
+    if (x > 2 || y > 2) {return;}
+
+    x += 1; // make the indexes greater by one
+    y += 1; // which makes the method behave the same as DrawX (and actually work!)
+
+    var radius = (SectionSize / 2) - SectionBorder;
+
+    DrawingContext.beginPath();
+    DrawingContext.arc((SectionSize * x) - (SectionSize / 2),
+            (SectionSize * y) - (SectionSize / 2),
+            radius, 0, Math.PI * 2, true);
+    DrawingContext.stroke();
+}
+
+
+function DrawX(x, y) {
+    if (x > 2 || y > 2) {return;}
+
+    DrawingContext.moveTo(SectionBorder + (SectionSize * x), SectionBorder + (SectionSize * y));
+    DrawingContext.lineTo((SectionSize * (x + 1)) - SectionBorder, (SectionSize * (y +1)) - SectionBorder);
+
+    DrawingContext.moveTo((SectionSize * x) + SectionBorder, (SectionSize * (y + 1)) - SectionBorder);
+    DrawingContext.lineTo((SectionSize * (x + 1)) - SectionBorder, (SectionSize * y) + SectionBorder);
+
+    DrawingContext.stroke();
+}
+
+function IsEvenNumber(numberToTest) {return (numberToTest%2 == 0) ? true : false;}
+
+function IsSectionUsed(x, y) {return Board[x][y] != "-";}
+
+function MouseDownEventHandler(e) {
+    if (e.pageX != undefined && e.pageY != undefined)
+    {
+        var x = Math.min(e.pageX, BoardSize * SectionSize);
+        x = Math.floor(x/SectionSize);
+
+        var y = Math.min(e.pageY, BoardSize * SectionSize);
+        y = Math.floor(y/SectionSize);
+        if (IsSectionUsed(x, y)) { return; }
+        if (IsEvenNumber(CurrentTurn)) {
+            DrawX(x,y);
+            Board[x][y] = "X";
+        }
+        else {
+            DrawO(x,y);
+            Board[x][y] = "O";
+        }
+
+        CurrentTurn += 1;
+    }
+}
+
+function DrawGame() {
+    CanvasElement = document.getElementById("canvas");
+
+    if (CanvasElement.getContext) {
+        DrawingContext = CanvasElement.getContext("2d");
+        BoardSize = CanvasElement.width;
+        SectionSize = BoardSize / 3;
+
+        CanvasElement.addEventListener("click", MouseDownEventHandler, false)
+
+            DrawingContext.beginPath();
+        DrawingContext.moveTo((BoardSize / 3), 0);
+        DrawingContext.lineTo((BoardSize / 3), BoardSize);
+        DrawingContext.moveTo(((BoardSize / 3) * 2), 0);
+        DrawingContext.lineTo(((BoardSize / 3) * 2), BoardSize);
+
+        DrawingContext.moveTo(0, (BoardSize / 3));
+        DrawingContext.lineTo(BoardSize, (BoardSize / 3));
+        DrawingContext.moveTo(0, ((BoardSize / 3) * 2));
+        DrawingContext.lineTo(BoardSize, ((BoardSize / 3) * 2));
+
+        DrawingContext.closePath();
+        DrawingContext.stroke();
+    }
+
+}
+
+function RestartGame()
+{
+    CurrentTurn = 1;
+    Board = new Array(new Array("-", "-", "-"),
+            new Array("-", "-", "-"), new Array("-", "-", "-"));
+    DrawingContext.clearRect(0, 0, CanvasElement.width, CanvasElement.height);
+    DrawGame();
+}
+
+</script>
+</head>
+<body onload="DrawGame();">
+    <canvas id="canvas" width="500" height="500"></canvas>
+</body>
+<form>
+    <p><button onclick="RestartGame();">New Game</button></p>
+    <p>Click in any square to begin. Circle goes first.</p>
+</form>
+</html>
+
