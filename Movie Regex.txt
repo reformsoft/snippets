@@ -1,5 +1,5 @@
 Primary:
-^(.+)\W(\d{4}?)\W?(.*)\.(.+)$
+^(.+)\W(\d{4}\b)\W?(.*)\.(.+)$
 
 Good for:
 Bob.the.Builder.2011.EEE.mkv
