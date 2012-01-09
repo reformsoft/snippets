@@ -1,5 +1,5 @@
 Primary:
-^(.+)\W(\d{4}\b)\W?(.*)\.(.+)$
+^(?<name>.+)\W(?<year>\d{4}\b)\W?(?<extra>.*)\.(?<ext>.+)$
 
 Good for:
 Bob.the.Builder.2011.EEE.mkv
@@ -10,7 +10,7 @@ Bob 55 (2011)EEE-bbb.def.mkv
 The Bob 2011.mkv
 
 Secondary:
-^(.+)\.(.+)$
+^(?<name>.+)\.(?<ext>.+)$
 
 Good for:
 The Terminator.mkv
