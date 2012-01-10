@@ -1,2 +1,7 @@
+Primary:
+^(.+)\W(S?\d{1,2}E?\d{1,2})\W(.*)\.(.+)$
+	* Terra.Nova.S01E10.1080p.HDTV.X264-DIMENSION.mkv
+	* Terra.Nova.0110.1080p.HDTV.X264-DIMENSION.mkv
+
 Secondary:
 ^(?<name>.+)\.(?<ext>.+)$
