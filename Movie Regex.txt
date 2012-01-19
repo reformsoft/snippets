@@ -1,16 +1,20 @@
-Primary:
-^(?<name>.+)\W(?<year>\d{4}\b)\W?(?<extra>.*)\.(?<ext>.+)$
+^(.+)\s\((?!1080)(\d{4})\)\.(.+)$
 
-Good for:
-Bob.the.Builder.2011.EEE.mkv
-Bob.the.Builder.1234.2011.EEE.mkv
-Bob.the.Builder.2011.EEE-CODECEWTF.mkv
-Bob The Builder (2011).mkv
-Bob 55 (2011)EEE-bbb.def.mkv
-The Bob 2011.mkv
+	Movie Name (2011).mkv
 
-Secondary:
-^(?<name>.+)\.(?<ext>.+)$
 
-Good for:
-The Terminator.mkv
+^(.+)\s\((?!1080)(\d{4})\)$
+
+	Movie DVD Directory (2011)
+
+^(.+)\s(?!1080)(\d{4})\.(.+)$
+
+	Movie Name 2011.mkv
+
+^(.+)\s(?!1080)(\d{4})$
+	
+	Movie DVD Directory 2011
+
+^(.+).(?!1080)(\d{4})\.?(.*)\.(.+)$
+
+	Movie.Name.2011.Probably.From-Usenet.mkv
